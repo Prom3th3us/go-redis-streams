@@ -19,7 +19,7 @@ import (
 
 var (
 	waitGrp       sync.WaitGroup
-	client        *redis.Client
+	client        *redis.ClusterClient
 	start         string = ">"
 	streamName    string = os.Getenv("STREAM")
 	consumerGroup string = os.Getenv("GROUP")

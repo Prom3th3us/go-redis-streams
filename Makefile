@@ -23,3 +23,13 @@ run:
 	@export REDIS_HOST=localhost
 	@export STREAM=events
 	@go run producer/*.go
+
+docker-build:
+	@docker login --username miguelemos --password Alatriste007
+	@echo "---- Building docker images ----"
+	@echo "---- -building: redis_consumer:latest ----"
+	@docker build . -t miguelemos/redis_consumer:latest --network=host -f consumer.docker
+	@echo "---- -building: redis_producer:latest ----"
+	@docker build . -t miguelemos/redis_producer:latest --network=host -f producer.docker
+	@docker push miguelemos/redis_producer:latest
+	@docker push miguelemos/redis_consumer:latest
