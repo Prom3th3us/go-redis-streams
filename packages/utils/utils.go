@@ -12,6 +12,7 @@ func NewRedisClient() (*redis.ClusterClient, error) {
 
 	client := redis.NewClusterClient(
 		&redis.ClusterOptions{
+			PoolSize: 10000,
 			Addrs:     []string{
 				fmt.Sprintf("%s:6379", os.Getenv("REDIS_HOST")),
 			},
