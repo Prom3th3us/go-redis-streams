@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"strconv"
 	"time"
-        "strconv"
 
 	evt "github.com/felipeagger/go-redis-streams/packages/event"
 	"github.com/felipeagger/go-redis-streams/packages/utils"
@@ -13,10 +13,10 @@ import (
 )
 
 var (
-	streamName string = os.Getenv("STREAM")
-	messagesAmount, _ = strconv.Atoi(os.Getenv("MESSAGES_AMOUNT"))
-	message string = os.Getenv("MESSAGE")
-	client     *redis.ClusterClient
+	streamName        string = os.Getenv("STREAM")
+	messagesAmount, _        = strconv.Atoi(os.Getenv("MESSAGES_AMOUNT"))
+	message           string = os.Getenv("MESSAGE")
+	client            *redis.ClusterClient
 )
 
 func init() {
@@ -35,7 +35,7 @@ func generateEvent() {
 	var userID uint64 = 0
 	for i := 0; i < messagesAmount; i++ {
 
-		fmt.Printf("trying for the %d time to produce this message: %s \n", i, message)
+		fmt.Printf("trying for the %dº time to produce this message: %s \n", i, message)
 
 		userID++ //uint64(rand.Intn(1000))
 
@@ -101,5 +101,3 @@ func checkError(err error, newID, eventType string, userID uint64, comment ...st
 
 	}
 }
-
-
